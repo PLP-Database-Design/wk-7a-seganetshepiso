@@ -1,5 +1,12 @@
-
+-- Question 1
 -- Transforming ProductDetail table into 1NF
+CREATE TABLE ProductDetail_1NF (
+    OrderID INT NOT NULL,
+    CustomerName VARCHAR(255) NOT NULL,
+    Product VARCHAR(255) NOT NULL
+);
+
+-- Inserting normalized data into ProductDetail_1NF
 INSERT INTO ProductDetail_1NF (OrderID, CustomerName, Product)
 VALUES
     (101, 'John Doe', 'Laptop'),
@@ -9,17 +16,29 @@ VALUES
     (102, 'Jane Smith', 'Mouse'),
     (103, 'Emily Clark', 'Phone');
 
+-- Question 2    
+-- Creating Orders table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerName VARCHAR(255) NOT NULL
+);
 
--- Splitting OrderDetails table into two tables to achieve 2NF
+-- Creating OrderProducts table
+CREATE TABLE OrderProducts (
+    OrderID INT NOT NULL,
+    Product VARCHAR(255) NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
 
--- Orders table
+-- Inserting data into Orders table
 INSERT INTO Orders (OrderID, CustomerName)
 VALUES
     (101, 'John Doe'),
     (102, 'Jane Smith'),
     (103, 'Emily Clark');
 
--- OrderProducts table
+-- Inserting data into OrderProducts table
 INSERT INTO OrderProducts (OrderID, Product, Quantity)
 VALUES
     (101, 'Laptop', 2),
@@ -27,6 +46,11 @@ VALUES
     (102, 'Tablet', 3),
     (102, 'Keyboard', 1),
     (102, 'Mouse', 2),
-    (103, 'Phone', 1); 
+    (103, 'Phone', 1);
+
+
+
+
+
 
     
